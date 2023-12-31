@@ -14,11 +14,21 @@ func TestGeneratePrivateKey(t *testing.T) {
 	assert.Equal(t, len(pubKey.Bytes()), pubKeyLen)
 }
 
+func TestNewPrivateKeyFromString(t *testing.T) {
+	var (
+		seed       = "654f49a3cc70d6739e5405aa743a1c71135bf6cd021c7c29ca8bf47071a9e1e2"
+		privKey    = NewPrivateKeyFromString(seed)
+		addressStr = "11a52f9813230f48354b1ec104321ff499902fd3"
+	)
+	assert.Equal(t, privKeyLen, len(privKey.Bytes()))
+	address := privKey.Public().Address()
+	assert.Equal(t, addressStr, address.String())
+}
 
 func TestPrivateKeySign(t *testing.T) {
 	privKey := GeneratePrivateKey()
 	pubKey := privKey.Public()
-	msg:= []byte("foo bar baz")
+	msg := []byte("foo bar baz")
 
 	sig := privKey.Sign(msg)
 	// Testing the success case
