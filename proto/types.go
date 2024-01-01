@@ -1,1 +1,1 @@
-package types
+package proto
