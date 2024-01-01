@@ -6,6 +6,7 @@ package proto
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 	math "math"
 )
 
@@ -26,6 +27,11 @@ type Block struct {
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
+}
+
+// ProtoReflect implements protoreflect.ProtoMessage.
+func (*Block) ProtoReflect() protoreflect.Message {
+	panic("unimplemented")
 }
 
 func (m *Block) Reset()         { *m = Block{} }
